@@ -14,7 +14,7 @@ Build the backend api image
 
 Run the image and backend
 
-`docker run -d -p 8081:3000 bpni-backend:latest`
+`docker run -d -p 3000:3000 -e JWT_SECRET=mysecretkey -e ENV_NAME=development -e CAPTCHA_SITE=localhost -e CAPTCHA_SECRET=mysecretkey bpni-backend:latest`
 
 Visit http://localhost:8081
 
