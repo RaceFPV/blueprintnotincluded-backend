@@ -1,22 +1,29 @@
 # Stage 1: Compile and Build angular codebase
 
 # Use official node image as the base image
-FROM node:15 as build
+FROM node:13 as build
+
+RUN mkdir --p /app/bpni/backend
 
 # Set the working directory
-WORKDIR /app
+WORKDIR /app/bpni/backend
 
 # Add the source code to app
-COPY ./ /app/blueprint
+COPY ./blueprintnotincluded-backend /app/bpni/backend
+COPY ./blueprintnotincluded-lib /app/bpni/blueprintnotincluded-lib
+
+# Build libs
+WORKDIR /app/bpni/blueprintnotincluded-lib
+RUN npm install --legacy-deps
 
 # Set the new working dir
-WORKDIR /app/blueprint
+WORKDIR /app/bpni/backend
 
 # Install all the dependencies
 RUN npm install --legacy-deps
 
-# Run the app
-RUN npm run dev
-
-# Expose port 80
+# Expose port 3000
 EXPOSE 3000
+
+#RUN npm run dev
+ENTRYPOINT npm run dev
