@@ -4,7 +4,7 @@ import { BlueprintModel } from './models/blueprint';
 
 export class Database
 {
-  dbURI = 'mongodb://localhost:27017/blueprintnotincluded';
+  dbURI = "mongodb://" + process.env.MONGO_DB_URI + "/blueprintnotincluded";
 
   constructor()
   {
